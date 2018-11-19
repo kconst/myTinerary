@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
+import { signIn } from "../../actions/authActions";
 
-class Register extends Component {
+class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,14 +33,11 @@ class Register extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const newUser = {
-      name: this.state.name,
+    const user = {
       email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2
+      password: this.state.password
     };
-    console.log(newUser);
-    this.props.registerUser(newUser, this.props.history);
+    this.props.signIn(user, this.props.history);
   }
 
   render() {
@@ -51,22 +48,9 @@ class Register extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">Create your MyTinerary account</p>
+              <h1 className="display-4 text-center">Sign In</h1>
+              <p className="lead text-center">Enter your log-in credentials.</p>
               <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control form-control-lg"
-                    placeholder="Name"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.onChange}
-                  />
-                  {errors.name && (
-                    <div className="invalid-feedback">{errors.name}</div>
-                  )}
-                </div>
                 <div className="form-group">
                   <input
                     type="email"
@@ -76,10 +60,6 @@ class Register extends Component {
                     value={this.state.email}
                     onChange={this.onChange}
                   />
-                  <small className="form-text text-muted">
-                    This site uses Gravatar so if you want a profile image, use
-                    a Gravatar email
-                  </small>
                 </div>
                 <div className="form-group">
                   <input
@@ -88,16 +68,6 @@ class Register extends Component {
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className="form-control form-control-lg"
-                    placeholder="Confirm Password"
-                    name="password2"
-                    value={this.state.password2}
                     onChange={this.onChange}
                   />
                 </div>
@@ -111,8 +81,8 @@ class Register extends Component {
   }
 }
 
-Register.Proptypes = {
-  registerUser: PropTypes.func.isRequired,
+Login.Proptypes = {
+  signIn: PropTypes.func.isRequired,
   auth: PropTypes.object.isReqired,
   errors: PropTypes.object.isRequired
 };
@@ -124,5 +94,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
-)(withRouter(Register));
+  { signIn }
+)(withRouter(Login));

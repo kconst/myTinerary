@@ -69,7 +69,8 @@ router.post('/signin', function(req, res){
                         });
                     return res.status(200).json({
                         success: 'Authenticated',
-                        token: JWTToken
+                        token: JWTToken,
+                        user
                     });
                 }
                 return res.status(401).json({

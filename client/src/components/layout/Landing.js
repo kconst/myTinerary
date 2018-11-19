@@ -4,9 +4,15 @@ import { registerUser } from "../../actions/authActions";
 import { connect } from "react-redux";
 
 class Landing extends Component {
+    constructor() {
+        super();
+        this.state = {
+            isAuthenticated: false
+        };
+    }
+
   render() {
     const { user } = this.props.auth;
-
     return (
       <div className="landing">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -39,7 +45,7 @@ class Landing extends Component {
         />
         {user ? (
           <h1 className="landing-inner text-light align:center">
-            WELCOME: {user.name}{" "}
+            WELCOME: {user.user.name}{" "}
           </h1>
         ) : null}
         <div className="landing-inner text-light">
