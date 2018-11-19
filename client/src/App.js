@@ -7,6 +7,7 @@ import Navbar from "./components/layout/NavBar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 import Cities from "./components/location/Cities";
 import Mytineraries from "./components/location/itinerary/Mytineraries";
 import Activities from "./components/location/itinerary/activity/Activities";
@@ -24,7 +25,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <div className="container">
               <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Register} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/cities" component={Cities} />
               <Route
                 exact
