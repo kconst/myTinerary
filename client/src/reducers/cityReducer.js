@@ -1,17 +1,17 @@
-import { GET_CITIES } from "../actions/types";
+import {GET_CITIES} from "../actions/types";
 
 const initialState = {
-  cities: null
+	cities: null
 };
 
-export default function(state = initialState, action) {
-  switch (action.type) {
-    case GET_CITIES:
-      return {
-        ...state,
-        cities: action.payload
-      };
-    default:
-      return state;
-  }
+export default function (state = initialState, action) {
+	switch (action.type) {
+		case GET_CITIES:
+			return {
+				...state,
+				cities: action.payload
+			};
+		default:
+			return state;
+	}
 }
