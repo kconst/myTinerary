@@ -80,7 +80,7 @@ router.post('/signin', function(req, res){
         })
         .catch(error => {
             res.status(500).json({
-                error: error
+                error: error.response
             });
         });
 });

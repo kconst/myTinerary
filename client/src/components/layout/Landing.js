@@ -12,42 +12,39 @@ class Landing extends Component {
 	}
 
 	render() {
-		const {user} = this.props.auth;
+		const { auth } = this.props.auth;
+		console.log(auth);
 		return (
 			<div className="landing">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img
 					src={require("../../img/music2.png")}
 					alt=""
 					width="2%"
 					className="landingIcons"
 				/>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img
 					src={require("../../img/plain.png")}
 					alt=""
 					width="2%"
 					className="landingIcons"
 				/>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img
 					src={require("../../img/food.png")}
 					alt=""
 					width="2%"
 					className="landingIcons"
 				/>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img
 					src={require("../../img/train.png")}
 					alt=""
 					width="2%"
 					className="landingIcons"
 				/>
-				{user ? (
+				{ auth && auth.isAuthenticated ? (
 					<h1 className="landing-inner text-light align:center">
-						WELCOME: {user.user.name}{" "}
+						WELCOME: {auth.user.name}{" "}
 					</h1>
-				) : null}
+				) : null }
 				<div className="landing-inner text-light">
 					<div className="container">
 						<div className="row">

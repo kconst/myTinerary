@@ -35,8 +35,10 @@ class Mytineraries extends Component {
 									return (
 										<li key={i} onClick={() => this.selectItinerary(myTinerary.title)}>
 											{myTinerary.title}
-											<Activities itinerary={myTinerary.title}
-											            isVisible={this.state.selectedItinerary === myTinerary.title}/>
+											<Activities
+												itinerary={myTinerary.title}
+												isVisible={this.state.selectedItinerary === myTinerary.title}
+											/>
 										</li>
 									);
 								})}

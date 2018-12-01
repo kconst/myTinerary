@@ -21,6 +21,7 @@ class Login extends Component {
 
 	//This method get the errors from Redux State and put into props and will be send to the errors in the Constructor
 	componentWillReceiveProps(nextProps) {
+		const { auth } = nextProps;
 		if (nextProps.errors) {
 			this.setState({errors: nextProps.errors});
 		}
@@ -49,7 +50,17 @@ class Login extends Component {
 					<div className="row">
 						<div className="col-md-8 m-auto">
 							<h1 className="display-4 text-center">Sign In</h1>
-							<p className="lead text-center">Enter your log-in credentials.</p>
+							<p className="lead text-center">
+								{(() => {
+									if (this.props.auth.response && this.props.auth.response.status === 401) {
+										return 'Login failed.';
+									} else if (this.props.auth.user && this.props.auth.isAuthenticated === true) {
+										return 'Login succeeded!';
+									} else {
+										return 'Enter your login credentials.';
+									}
+								}).bind(this)()}
+							</p>
 							<form onSubmit={this.onSubmit}>
 								<div className="form-group">
 									<input

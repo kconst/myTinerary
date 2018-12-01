@@ -21,38 +21,37 @@ export const registerUser = (userData, history) => dispatch => {
         );
 };
 export const signIn = (userData, history) => dispatch => {
-    let status;
     axios
         .post("http://localhost:5000/api/users/signin", userData)
-        .then(
-            res => {
-                if (res.data.success === "Authenticated") {
-                    status = true;
-                    return dispatch({
-                        type: SUCCESS_LOGIN_DISPATCH,
-                        payload: {
-                            isAuthenticated: true,
-                            user: {
-                                name: res.data.user.name,
-                                email: res.data.user.email,
-                                token: res.data.user.token
-                            }
+        .then(res => {
+            if (res.data.success === "Authenticated") {
+                return dispatch({
+                    type: SUCCESS_LOGIN_DISPATCH,
+                    payload: {
+                        isAuthenticated: true,
+                        user: {
+                            name: res.data.user.name,
+                            email: res.data.user.email,
+                            token: res.data.token
                         }
-                    });
-                }
-
-                return dispatch({
-                    type: FAILURE_LOGIN_DISPATCH,
-                    payload: res.data
+                    }
                 });
-            },
-            history.push("/")
-        )
-        .catch(err => {
-                return dispatch({
-                    type: FAILURE_LOGIN_DISPATCH,
-                    payload: err
-                })
             }
-        );
+            return dispatch({
+                type: FAILURE_LOGIN_DISPATCH,
+                payload: {
+                    isAuthenticated: false,
+                    response: res.data
+                }
+            });
+        })
+        .catch(err => {
+            return dispatch({
+                type: FAILURE_LOGIN_DISPATCH,
+                payload: {
+                    isAuthenticated: false,
+                    response: err.response
+                }
+            })
+        });
 };

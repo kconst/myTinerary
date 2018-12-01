@@ -11,25 +11,29 @@ const initialState = {
 export default function (state = initialState, action) {
 	switch (action.type) {
 		case SUCCESS_REGISTRATION_DISPATCH:
-			return {
-				...state,
-				user: action.payload
-			};
+			return Object.assign({}, state, {
+				isAuthenticated: action.payload.isAuthenticated,
+				user: action.payload.user,
+				response: null
+			});
 		case SUCCESS_LOGIN_DISPATCH:
-			return {
-				...state,
-				user: action.payload
-			};
+			return Object.assign({}, state, {
+				isAuthenticated: action.payload.isAuthenticated,
+				user: action.payload.user,
+				response: null
+			});
 		case FAILURE_LOGIN_DISPATCH:
-			return {
-				...state,
-				user: action.payload
-			};
+			return Object.assign({}, state, {
+				isAuthenticated: action.payload.isAuthenticated,
+				user: action.payload.user,
+				response: action.payload.response
+			});
 		case PENDING_LOGIN_DISPATCH:
-			return {
-				...state,
-				user: action.payload
-			};
+			return Object.assign({}, state, {
+				isAuthenticated: action.payload.isAuthenticated,
+				user: action.payload.user,
+				response: null
+			});
 		default:
 			return state;
 	}
