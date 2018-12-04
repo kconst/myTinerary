@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <meta name="google-signin-client_id" content="221196949367-9jpu0k22ikpd1pv44kt8gp472i58j011.apps.googleusercontent.com">
     <!--
         manifest.json provides metadata used when your web app is added to the
         homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -14,6 +15,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '261423501398416',
+				cookie     : true,
+				xfbml      : true,
+				version    : 'v3.2'
+			});
+
+			FB.AppEvents.logPageView();
+			FB.getLoginStatus(function(response) {
+				// statusChangeCallback(response);
+				console.log('Facebook login status:', response);
+			});
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=261423501398416&autoLogAppEvents=1';
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+    </script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
             integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB"
             crossorigin="anonymous"></script>
@@ -32,6 +59,19 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script type="application/javascript">
+    function onSignIn(googleUser) {
+	    // var event =
+	    var profile = googleUser.getBasicProfile();
+	    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	    console.log('Name: ' + profile.getName());
+	    console.log('Image URL: ' + profile.getImageUrl());
+	    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	    profile.id_token = googleUser.getAuthResponse().id_token;
+	    document.dispatchEvent(new CustomEvent('googleSignOn', { detail: profile }));
+    }
+
+</script>
 </body>
 
 </html>

@@ -20,9 +20,9 @@ export const registerUser = (userData, history) => dispatch => {
             })
         );
 };
-export const signIn = (userData, history) => dispatch => {
+export const signIn = (userData) => dispatch => {
     axios
-        .post("http://localhost:5000/api/users/signin", userData)
+        .post(userData.type !== 'form' ? "http://localhost:5000/api/users/signInThirdParty" : "http://localhost:5000/api/users/signin", userData)
         .then(res => {
             if (res.data.success === "Authenticated") {
                 return dispatch({

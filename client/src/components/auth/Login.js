@@ -15,13 +15,20 @@ class Login extends Component {
 			errors: {}
 		};
 
+		document.addEventListener('googleSignOn', event => {
+			this.props.signIn({
+				email: event.detail.getEmail(),
+				type: 'google',
+				token: event.detail.id_token
+			});
+		}, false);
+
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
 	//This method get the errors from Redux State and put into props and will be send to the errors in the Constructor
 	componentWillReceiveProps(nextProps) {
-		const { auth } = nextProps;
 		if (nextProps.errors) {
 			this.setState({errors: nextProps.errors});
 		}
@@ -33,12 +40,20 @@ class Login extends Component {
 
 	onSubmit(e) {
 		e.preventDefault();
-
-		const user = {
+		this.props.signIn({
 			email: this.state.email,
-			password: this.state.password
-		};
-		this.props.signIn(user, this.props.history);
+			password: this.state.password,
+			type: 'form'
+		});
+	}
+
+	facebookLogin() {
+
+		window.FB.login(function(response){
+			// Handle the response object, like in statusChangeCallback() in our demo
+			// code.
+			debugger
+		});
 	}
 
 	render() {
@@ -83,6 +98,8 @@ class Login extends Component {
 									/>
 								</div>
 								<input type="submit" className="btn btn-info btn-block mt-4"/>
+								<div className="g-signin2" data-width="320" data-height="50" data-longtitle="true" data-onsuccess="onSignIn"></div>
+								<button onClick={ this.facebookLogin.bind(this) }>Login with Facebook</button>
 							</form>
 						</div>
 					</div>
