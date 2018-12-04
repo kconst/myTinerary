@@ -38,20 +38,22 @@ class Activities extends Component {
 				<div className="container">
 					<div className="slider">
 						{activities.map((activity, index) => (
-							<div className="slider__title" key={index}>
-								<span className="slider__title__header">{activity.title}</span>
-								<div className="slider__title__description">{activity.description}</div>
+							<div className="slider__tile" key={index}>
+								<span className="slider__tile__header">{activity.title}</span>
+								<div className="slider__tile__description">{activity.description}</div>
 							</div>
 						))}
-						<div className="col-mn12">
-							<h1 className="lead">
-								{posts.map((post, index) => (
-									<div key={index}>
-										<h2>{post.description}</h2>
-									</div>
-								))}
-							</h1>
-						</div>
+					</div>
+					<div className="comments">
+						<h4>Comments</h4>
+						<input type="text" placeholder="Your comment..." className="comments__add-comment"/>
+						<button className="comments__submit">></button>
+						{posts.map((post, index) => (
+							<div className="comments__comment" key={index}>
+								<span className="comments__comment__author">{post.user}</span>
+								<span className="comments__comment__text">{post.description}</span>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>

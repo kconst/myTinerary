@@ -14,9 +14,6 @@ class Mytineraries extends Component {
 	}
 
 	componentDidMount() {
-		/*if (this.props.match.params.city) {
-			this.props.getMyTinerariesByCity(this.props.match.params.city);
-		}*/
 		this.setState({
 			user: this.props.getUser(),
 			mytineraries: this.props.getAllMyTineraries()
@@ -30,34 +27,40 @@ class Mytineraries extends Component {
 	render() {
 		let myTineraries = this.props.myTineraries || [];
 		return (
-			<div className="myTineraries">
-				<div className="container">
-					<div className="row">
-						<div className="col-mn12">
-							<h1 className="lead">
-								{(state => {
-									if (!this.state.user) {
-										return "Please login."
-									}
-									return myTineraries
-										.filter(myTinerary => state.user.payload.user.favorites.indexOf(myTinerary._id) !== -1)
-										.map((myTinerary, i) => {
-											return (
-												<li key={i} onClick={() => this.selectItinerary(myTinerary.title)}>
-													{myTinerary.title}
-													<Activities
-														itinerary={myTinerary.title}
-														isVisible={this.state.selectedItinerary === myTinerary.title}
-													/>
-												</li>
-											);
-										})
-								})(this.state)}
-							</h1>
-						</div>
-					</div>
-				</div>
-			</div>
+			<ul className="mytinerary">
+				{(state => {
+					if (!this.state.user || (!state.user.payload.isAuthenticated && !state.user.payload.user)) {
+						return "Please login."
+					}
+					return myTineraries
+						.filter(myTinerary => state.user.payload.user.favorites.indexOf(myTinerary._id) !== -1)
+						.map((myTinerary, i) => {
+							return (
+								<li className="mytinerary__itinerary" key={i} onClick={() => this.selectItinerary(myTinerary.title)}>
+									<div className="mytinerary__itinerary__header-details">
+										<div className="mytinerary__itinerary__header-details__profile"></div>
+										<div className="mytinerary__itinerary__header-details__details">
+											<span className="mytinerary__itinerary__header-details__details__title">{myTinerary.title}</span>
+											<div className="mytinerary__itinerary__header-details__details__numbers">
+												<span className="mytinerary__itinerary__header-details__details__numbers__rating">Rating 4.45</span>
+												<span className="mytinerary__itinerary__header-details__details__numbers__hours">12 hours</span>
+												<span className="mytinerary__itinerary__header-details__details__numbers__dollars">12 hours</span>
+											</div>
+											<span className="mytinerary__itinerary__tags">#Restaurants #Food&Drink</span>
+										</div>
+									</div>
+
+
+
+									<Activities
+										itinerary={myTinerary.title}
+										isVisible={this.state.selectedItinerary === myTinerary.title}
+									/>
+								</li>
+							);
+						})
+				})(this.state)}
+			</ul>
 		);
 	}
 }

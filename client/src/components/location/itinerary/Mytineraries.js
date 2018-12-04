@@ -25,27 +25,20 @@ class Mytineraries extends Component {
 	render() {
 		let myTineraries = this.props.myTineraries || [];
 		return (
-			<div className="myTineraries">
-				<div className="container">
-					<div className="row">
-						<div className="col-mn12">
-							<h1 className="lead">
-								{myTineraries.map((myTinerary, i) => {
-									return (
-										<li key={i} onClick={() => this.selectItinerary(myTinerary.title)}>
-											{myTinerary.title}
-											<Activities
-												itinerary={myTinerary.title}
-												isVisible={this.state.selectedItinerary === myTinerary.title}
-											/>
-										</li>
-									);
-								})}
-							</h1>
-						</div>
-					</div>
-				</div>
-			</div>
+			<ul className="container">
+				{myTineraries.map((myTinerary, i) => {
+					return (
+						<li className="itinerary" key={i} onClick={() => this.selectItinerary(myTinerary.title)}>
+							<div className="itinerary__profile"></div>
+							<span className="itinerary__title">{myTinerary.title}</span>
+							<Activities
+								itinerary={myTinerary.title}
+								isVisible={this.state.selectedItinerary === myTinerary.title}
+							/>
+						</li>
+					);
+				})}
+			</ul>
 		);
 	}
 }
