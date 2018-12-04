@@ -14,7 +14,7 @@ import Favorites from "./components/location/itinerary/favorites";
 import Activities from "./components/location/itinerary/activity/Activities";
 import Posts from "./components/location/itinerary/posts/Posts";
 
-import "./App.css";
+import "./App.scss";
 
 class App extends Component {
 	render() {

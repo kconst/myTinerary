@@ -38,6 +38,10 @@ img {
     height: 80vh;
     margin-top: -24px;
     margin-bottom: -50px;
+
+    b {
+        color: red;
+    }
 }
 
 .landing-inner {
@@ -64,4 +68,14 @@ img {
 
 .form-control::placeholder {
     color: #bbb;
+}
+
+
+.slider {
+    &__title {
+        color: red;
+    }
+    &__description {
+        color: blue;
+    }
 }

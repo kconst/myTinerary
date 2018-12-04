@@ -38,9 +38,9 @@ class Activities extends Component {
 				<div className="container">
 					<div className="slider">
 						{activities.map((activity, index) => (
-							<div class="slider__tile" key={index}>
-								<span class="slider__tile__header">{activity.title}</span>
-								<div class="slider__tile__description">{activity.description}</div>
+							<div className="slider__title" key={index}>
+								<span className="slider__title__header">{activity.title}</span>
+								<div className="slider__title__description">{activity.description}</div>
 							</div>
 						))}
 						<div className="col-mn12">
