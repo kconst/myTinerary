@@ -25,6 +25,7 @@ export const signIn = (userData) => dispatch => {
         .post(userData.type !== 'form' ? "http://localhost:5000/api/users/signInThirdParty" : "http://localhost:5000/api/users/signin", userData)
         .then(res => {
             if (res.data.success === "Authenticated") {
+                window.sessionStorage.setItem('mytinerary-user', JSON.stringify(res.data.user));
                 return dispatch({
                     type: SUCCESS_LOGIN_DISPATCH,
                     payload: {
@@ -54,4 +55,23 @@ export const signIn = (userData) => dispatch => {
                 }
             })
         });
+};
+export const getUser = () => dispatch => {
+	let user = window.sessionStorage.getItem('mytinerary-user');
+	if (user) {
+	    user = JSON.parse(user);
+		return dispatch({
+			type: SUCCESS_LOGIN_DISPATCH,
+			payload: {
+				user
+			}
+		});
+    } else {
+		return dispatch({
+			type: FAILURE_LOGIN_DISPATCH,
+			payload: {
+				isAuthenticated: false
+			}
+		})
+    }
 };

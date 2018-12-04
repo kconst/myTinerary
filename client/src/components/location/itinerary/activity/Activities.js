@@ -36,16 +36,13 @@ class Activities extends Component {
 		return (
 			<div className="activities" style={{display: this.state.isVisible ? 'inline' : 'none'}}>
 				<div className="container">
-					<div className="row">
-						<Slider>
-							{activities.map((activity, index) => (
-								<div key={index}>
-									<h2>{activity.title}</h2>
-
-									<div>{activity.description}</div>
-								</div>
-							))}
-						</Slider>
+					<div className="slider">
+						{activities.map((activity, index) => (
+							<div class="slider__tile" key={index}>
+								<span class="slider__tile__header">{activity.title}</span>
+								<div class="slider__tile__description">{activity.description}</div>
+							</div>
+						))}
 						<div className="col-mn12">
 							<h1 className="lead">
 								{posts.map((post, index) => (

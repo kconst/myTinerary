@@ -38,6 +38,11 @@ class NavBar extends Component {
 									Login
 								</a>
 							</li>
+							<li className="nav-item">
+								<a className="nav-link" href="/favorites">
+									Favorites
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

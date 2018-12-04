@@ -24,7 +24,6 @@ class Mytineraries extends Component {
 
 	render() {
 		let myTineraries = this.props.myTineraries || [];
-		console.log(this.state.selectedItinerary)
 		return (
 			<div className="myTineraries">
 				<div className="container">

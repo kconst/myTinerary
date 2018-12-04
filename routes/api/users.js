@@ -118,6 +118,44 @@ router.post('/signInThirdParty', function(req, res){
 		});
 });
 
+router.put('/update', function(req, res){
+	User.findOne({email: req.body.email})
+		.exec()
+		.then(function(user) {
+			console.log(user);
+			bcrypt.compare(req.body.password, user.password, function(err, result){
+				if(err) {
+					return res.status(401).json({
+						failed: 'Unauthorized Access'
+					});
+				}
+				if(result) {
+					const JWTToken = jwt.sign({
+							email: user.email,
+							_id: user._id
+						},
+						'secret',
+						{
+							expiresIn: '2h'
+						});
+					return res.status(200).json({
+						success: 'Authenticated',
+						token: JWTToken,
+						user
+					});
+				}
+				return res.status(401).json({
+					failed: 'Unauthorized Access'
+				});
+			});
+		})
+		.catch(error => {
+			res.status(500).json({
+				error: error.response
+			});
+		});
+});
+
 async function verifyGoogle(token) {
 	const ticket = await client.verifyIdToken({
 		idToken: token,

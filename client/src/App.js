@@ -10,6 +10,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Cities from "./components/location/Cities";
 import Mytineraries from "./components/location/itinerary/Mytineraries";
+import Favorites from "./components/location/itinerary/favorites";
 import Activities from "./components/location/itinerary/activity/Activities";
 import Posts from "./components/location/itinerary/posts/Posts";
 
@@ -27,6 +28,7 @@ class App extends Component {
 							<Route exact path="/register" component={Register}/>
 							<Route exact path="/login" component={Login}/>
 							<Route exact path="/cities" component={Cities}/>
+							<Route exact path="/favorites" component={Favorites}/>
 							<Route
 								exact
 								path="/mytineraries/:city"
