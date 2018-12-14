@@ -16,31 +16,6 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-    <script>
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId      : '261423501398416',
-				cookie     : true,
-				xfbml      : true,
-				version    : 'v3.2'
-			});
-
-			FB.AppEvents.logPageView();
-			FB.getLoginStatus(function(response) {
-				// statusChangeCallback(response);
-				console.log('Facebook login status:', response);
-			});
-		};
-
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s); js.id = id;
-			js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=261423501398416&autoLogAppEvents=1';
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-    </script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
             integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB"
             crossorigin="anonymous"></script>
@@ -70,7 +45,6 @@
 	    profile.id_token = googleUser.getAuthResponse().id_token;
 	    document.dispatchEvent(new CustomEvent('googleSignOn', { detail: profile }));
     }
-
 </script>
 </body>
 
