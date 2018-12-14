@@ -119,41 +119,39 @@ router.post('/signInThirdParty', function(req, res){
 });
 
 router.put('/update', function(req, res){
-	User.findOne({email: req.body.email})
-		.exec()
-		.then(function(user) {
-			console.log(user);
-			bcrypt.compare(req.body.password, user.password, function(err, result){
-				if(err) {
-					return res.status(401).json({
-						failed: 'Unauthorized Access'
-					});
-				}
-				if(result) {
-					const JWTToken = jwt.sign({
-							email: user.email,
-							_id: user._id
-						},
-						'secret',
-						{
-							expiresIn: '2h'
+	jwt.verify(req.body.token, 'secret', (err, decoded) => {
+		if (err) {
+			return res.status(500).send({
+				auth: false, message: 'Failed to authenticate token.'
+			});
+		}
+
+		if (decoded.email === req.body.email) {
+			User.findOne({ email: req.body.email })
+				.exec()
+				.then(function(user) {
+					User.findOneAndUpdate(
+						{ email: req.body.email },
+						Object.assign(user, {
+							name: req.body.name,
+							email: req.body.email,
+							favorites: req.body.favorites
+						}),
+						{ new: true },
+						(err, entry) => {
+							if (err) {
+								return res.status(500).send(err);
+							}
+							return res.status(200).send(entry);
 						});
-					return res.status(200).json({
-						success: 'Authenticated',
-						token: JWTToken,
-						user
+				})
+				.catch(error => {
+					res.status(500).json({
+						error: error.response
 					});
-				}
-				return res.status(401).json({
-					failed: 'Unauthorized Access'
 				});
-			});
-		})
-		.catch(error => {
-			res.status(500).json({
-				error: error.response
-			});
-		});
+		}
+	});
 });
 
 async function verifyGoogle(token) {
