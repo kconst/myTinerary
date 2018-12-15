@@ -25,7 +25,7 @@ export const signIn = (userData) => dispatch => {
         .post(userData.type !== 'form' ? "http://localhost:5000/api/users/signInThirdParty" : "http://localhost:5000/api/users/signin", userData)
         .then(res => {
             if (res.data.success === "Authenticated") {
-                window.sessionStorage.setItem('mytinerary-user', JSON.stringify(res.data.user));
+                window.sessionStorage.setItem('mytinerary-user', JSON.stringify({ ...res.data.user, token: res.data.token }));
                 return dispatch({
                     type: SUCCESS_LOGIN_DISPATCH,
                     payload: {
@@ -56,6 +56,7 @@ export const signIn = (userData) => dispatch => {
             })
         });
 };
+
 export const getUser = () => dispatch => {
 	let user = window.sessionStorage.getItem('mytinerary-user');
 	if (user) {
@@ -74,4 +75,22 @@ export const getUser = () => dispatch => {
 			}
 		})
     }
+};
+
+export const updateUser = (userData) => dispatch => {
+	axios
+		.put("http://localhost:5000/api/users/update", userData)
+		.then(res => {
+			window.sessionStorage.setItem('mytinerary-user', JSON.stringify(userData));
+			return dispatch({
+				type: SUCCESS_REGISTRATION_DISPATCH,
+				payload: res.data
+			})
+		})
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
+		);
 };

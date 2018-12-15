@@ -6,7 +6,6 @@ import {
 	getPostsByMyTinerary
 } from "../../../../actions/activitiesActions";
 
-import Slider from "react-animated-slider";
 import "react-animated-slider/build/horizontal.css";
 
 class Activities extends Component {

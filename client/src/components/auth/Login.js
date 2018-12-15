@@ -47,15 +47,6 @@ class Login extends Component {
 		});
 	}
 
-	facebookLogin() {
-
-		window.FB.login(function(response){
-			// Handle the response object, like in statusChangeCallback() in our demo
-			// code.
-			debugger
-		});
-	}
-
 	render() {
 		const {errors} = this.state; //This will be used to Validate Inputs
 
@@ -98,8 +89,7 @@ class Login extends Component {
 									/>
 								</div>
 								<input type="submit" className="btn btn-info btn-block mt-4"/>
-								<div className="g-signin2" data-width="320" data-height="50" data-longtitle="true" data-onsuccess="onSignIn"></div>
-								<button onClick={ this.facebookLogin.bind(this) }>Login with Facebook</button>
+								<div className="g-signin2" data-width="360" data-height="50" data-longtitle="true" data-onsuccess="onSignIn"></div>
 							</form>
 						</div>
 					</div>

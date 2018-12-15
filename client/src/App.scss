@@ -82,6 +82,7 @@ ul.container {
 
         margin: 10px 0;
         &__header-details {
+            position: relative;
             display: flex;
             width: 100%;
             &__profile {
@@ -100,6 +101,19 @@ ul.container {
                 &__numbers {
                     display: flex;
                     justify-content: space-between;
+                }
+            }
+
+            &__heart {
+                content: "❤️";
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                top: 0;
+                right: 0;
+
+                &--active {
+                    color: crimson;
                 }
             }
         }
