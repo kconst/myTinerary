@@ -25,6 +25,12 @@ class Mytineraries extends Component {
 	}
 
 	favorite(itinerary, event) {
+		if (!this.props.user) {
+			alert("You need to be logged in to favorite itineraries.");
+			event.stopPropagation();
+			return;
+		}
+
 		const favorites = this.props.user.favorites;
 		const favoriteIndex = favorites.indexOf(itinerary._id);
 		// if its already a favorite, remove it

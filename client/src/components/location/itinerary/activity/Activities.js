@@ -47,7 +47,7 @@ class Activities extends Component {
 						<h4>Comments</h4>
 						<input type="text" placeholder="Your comment..." className="comments__add-comment"/>
 						<button className="comments__submit">></button>
-						{posts.map((post, index) => (
+						{posts.filter(post => post.mytinerary === this.props.itinerary).map((post, index) => (
 							<div className="comments__comment" key={index}>
 								<span className="comments__comment__author">{post.user}</span>
 								<span className="comments__comment__text">{post.description}</span>
@@ -61,7 +61,6 @@ class Activities extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state);
 	return {
 		activities: state.activity.activities,
 		posts: state.post.posts

@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
 		case GET_POSTS_BY_MYTINERARY:
 			return {
 				...state,
-				posts: action.payload //, ...state.posts]
+				posts: (state.posts || []).concat(action.payload) //, ...state.posts]
 			};
 		default:
 			return state;
